@@ -1,0 +1,23 @@
+.mainCont {
+  /* background-color: rgb(207, 206, 207); */
+  width: auto;
+  margin-left: 50px;
+  padding-left: 20px;
+  border-left: 3px solid black;
+}
+.topInfo {
+  display: flex;
+}
+
+.options {
+  display: flex;
+  color: grey;
+}
+h3 {
+  margin-top: 5px;
+}
+.topInfo > p,
+.options > p {
+  margin-right: 10px;
+  margin-top: 0;
+}
