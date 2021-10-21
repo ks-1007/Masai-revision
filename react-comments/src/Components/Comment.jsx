@@ -1,11 +1,17 @@
 import moment from "moment"
-import React from "react"
+import React, { useState } from "react"
 import styles from "./Comment.module.css"
 function Comment({ author, body, timestamp, points, replies }) {
+  const [showReply, setShowReply] = useState(false)
+  const [replyList, setReplyList] = useState(replies)
+  console.log("replyList:", replyList)
   return (
     <div className={styles.mainCont}>
       <div className={styles.topInfo}>
-        <p>{author}</p>
+        {replyList?.length && !showReply && (
+          <h3 onClick={() => setShowReply(true)}>+</h3>
+        )}
+        <p onClick={() => setShowReply(false)}>{author}</p>
         <p>{points} points</p>
         <p>{moment(timestamp).fromNow()}</p>
       </div>
@@ -17,7 +23,7 @@ function Comment({ author, body, timestamp, points, replies }) {
         <p>Report</p>
         <p>Save</p>
       </div>
-      {replies && replies.map((item) => <Comment {...item} />)}
+      {showReply && replyList && replyList.map((item) => <Comment {...item} />)}
     </div>
   )
 }
