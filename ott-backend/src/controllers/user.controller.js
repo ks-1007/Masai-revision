@@ -20,6 +20,6 @@ router.post("", authenticate, async (req, res) => {
     .exec()
 
   const token = newToken(updatedUser)
-  return res.status(201).send({ token, updatedUser })
+  return res.status(201).send({ token })
 })
 module.exports = router
