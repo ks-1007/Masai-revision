@@ -23,6 +23,14 @@ const login = async (req, res) => {
       .status(400)
       .send({ status: "failed", message: "Please check credentials" })
 
+  // checking for subscription date
+  let { subscription_date } = user
+  let date = new Date().getTime()
+  if (date - subscription_date > 30 * 24 * 60 * 60 * 1000) {
+    const updated_user = await User.findByIdAndUpdate(user._id, {
+      subscription: "guest",
+    })
+  }
   // if password match then create token and send it
   const token = newToken(user)
 

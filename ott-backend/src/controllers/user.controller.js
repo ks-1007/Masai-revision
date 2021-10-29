@@ -11,13 +11,14 @@ const newToken = (user) => {
 // adding or renewing plan for user
 router.post("", authenticate, async (req, res) => {
   const { user } = req.user
-  console.log(user._id)
+  const date = new Date().getTime()
+  req.body.subscription_date = date
   const updatedUser = await User.findByIdAndUpdate(user._id, req.body, {
     new: true,
   })
     .lean()
     .exec()
-  console.log(updatedUser)
+
   const token = newToken(updatedUser)
   return res.status(201).send({ token, updatedUser })
 })
